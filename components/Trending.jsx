@@ -9,7 +9,7 @@ const Trending = ({ posts }) => {
       renderItem={({ item }) => (
         <Text className="text-3xl text-white">{item.id}</Text>
       )}
-      horizontal
+      horizontal  
     />
   );
 };
