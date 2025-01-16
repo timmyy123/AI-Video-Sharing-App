@@ -1,3 +1,4 @@
+import React, { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -5,63 +6,64 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  Button,
 } from "react-native";
-import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as Animatable from "react-native-animatable";
+import WebView from "react-native-webview";
 import { icons } from "../constants";
-import { ResizeMode, Video } from "expo-av";
-import { useVideoPlayer, VideoView } from "expo-video";
 
-const zoom = (isZoomIn) => {
-  return {
-    0: {
-      scale: isZoomIn ? 0.9 : 1.0,
-    },
-    1: {
-      scale: isZoomIn ? 1.0 : 0.9,
-    },
-  };
+const zoomIn = {
+  0: {
+    scale: 0.9,
+  },
+  1: {
+    scale: 1,
+  },
+};
+
+const zoomOut = {
+  0: {
+    scale: 1,
+  },
+  1: {
+    scale: 0.9,
+  },
 };
 
 const TrendingItem = ({ activeItem, item }) => {
-  const videoSource = item.video;
   const [play, setPlay] = useState(false);
-  const videoViewRef = useRef(null)
 
-  const player = useVideoPlayer(videoSource, (player) => {
-    player.loop = false;
-    // if(play) 
-      // player.play();
-  });
-  useEffect(()=>{
-    if(play) player.play()
-      console.log(play)
-  },[play])
   return (
     <Animatable.View
-      animation={zoom(activeItem === item.$id)}
-      duration={500}
       className="mr-5"
+      animation={activeItem === item.$id ? zoomIn : zoomOut}
+      duration={500}
     >
       {play ? (
-        <VideoView
-          player={player}
-          className="w-52 h-72 rounded-[35px] mt-3 bg-white/10"
-          allowsFullscreen
-          allowsPictureInPicture
-          contentFit="contain"
-        />
+        <View className="w-52 h-72 relative">
+          <WebView
+            source={{ uri: `${item.video}&muted` }}
+            className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
+            allowsFullscreenVideo
+            onLoadEnd={() => console.log("Video Loaded")}
+            onError={(e) => console.log("WebView Error:", e.nativeEvent)}
+          />
+          <TouchableOpacity
+            style={{ position: "absolute", bottom: 10, right: 10 }}
+            onPress={() => setPlay(false)}
+          >
+            <View
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+                borderRadius: 10,
+                padding: 5,
+              }}
+            >
+              <Text style={{ color: "white", fontSize: 12 }}>Finish</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       ) : (
-        // <Video source={{uri: item.video}}
-        // className='w-52 h-72 rounded-[35px] mt-3 bg-white/10'
-        // resizeMode={ResizeMode.CONTAIN}
-        // useNativeControls
-        // shouldPlay
-        // onPlaybackStatusUpdate={(status) => {
-        //   if(status.didJustFinish){
-        //     setPlay(false)
-        //   }
-        // }}/>
         <TouchableOpacity
           className="relative justify-center items-center"
           activeOpacity={0.7}
@@ -69,8 +71,7 @@ const TrendingItem = ({ activeItem, item }) => {
         >
           <ImageBackground
             source={{ uri: item.thumbnail }}
-            className="w-52 h-72 rounded-[35px] my-5
-            overflow-hidden shadow-lg shadow-black/40"
+            className="w-52 h-72 rounded-[35px] my-5 overflow-hidden shadow-lg shadow-black/40"
             resizeMode="cover"
           />
           <Image
@@ -92,6 +93,7 @@ const Trending = ({ posts }) => {
       setActiveItem(viewableItems[0].key);
     }
   }, []);
+
   return (
     <FlatList
       data={posts}
@@ -103,7 +105,6 @@ const Trending = ({ posts }) => {
       viewabilityConfig={{
         itemVisiblePercentThreshold: 70,
       }}
-      contentOffset={{ x: 170 }}
       horizontal
     />
   );
