@@ -1,5 +1,5 @@
 import { View, Text, FlatList, Image, RefreshControl, Alert } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '../../constants'
 import SearchInput from '../../components/SearchInput'
@@ -8,12 +8,14 @@ import EmptyState from '../../components/EmptyState'
 import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 import useAppwrite from '../../hooks/useAppwrite'
 import VideoCard from '../../components/VideoCard'
+import { useGlobalContext } from '../../context/GlobalProvider'
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
 
   const{data: posts, fetchData} = useAppwrite(getAllPosts)
   const{data: latestPosts} = useAppwrite(getLatestPosts)
+  const {user} = useGlobalContext()
   
   
   const onRefresh = async () => {
@@ -38,7 +40,7 @@ const Home = () => {
                 Welcome Back
               </Text>
               <Text className='text-2xl font-psemibold text-white'>
-                a
+                {user.username}
               </Text>
             </View>
             <View className='mt-1.5'>
