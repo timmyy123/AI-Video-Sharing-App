@@ -27,11 +27,9 @@ const SignIn = () => {
     try {
       await signIn(form.email, form.password);
       const currentUser = await getCurrentUser();
-      if (currentUser) {
-        setUser(currentUser);
-        setIsLoggedIn(true);
-        router.replace("/home");
-      }
+      setUser(currentUser);
+      setIsLoggedIn(true);
+      router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
