@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
@@ -39,12 +38,13 @@ const RootLayout = () => {
           name="(tabs)"
           options={{ headerShown: false }}
         ></Stack.Screen>
-        <Stack.Screen name='search/[query]' options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen
+          name="search/[query]"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
       </Stack>
     </GlobalProvider>
   );
 };
 
 export default RootLayout;
-
-const styles = StyleSheet.create({});

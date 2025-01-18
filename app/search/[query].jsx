@@ -11,7 +11,7 @@ import { useLocalSearchParams } from "expo-router";
 const Search = () => {
   const { query } = useLocalSearchParams();
 
-  const { data: posts, fetchData } = useAppwrite(()=>searchPosts(query));
+  const { data: posts, fetchData } = useAppwrite(() => searchPosts(query));
 
   useEffect(() => {
     fetchData();
@@ -34,11 +34,7 @@ const Search = () => {
             </View>
           </View>
         )}
-        ListEmptyComponent={() => (
-          <EmptyState
-            title="No Videos Found"
-          />
-        )}
+        ListEmptyComponent={() => <EmptyState title="No Videos Found" />}
       />
     </SafeAreaView>
   );

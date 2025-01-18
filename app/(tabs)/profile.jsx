@@ -1,12 +1,11 @@
-import { View, Text, FlatList, TouchableOpacity, Image } from "react-native";
-import React, { useEffect } from "react";
+import { View, FlatList, TouchableOpacity, Image } from "react-native";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
-import { getUserPosts, searchPosts, signOut } from "../../lib/appwrite";
+import { getUserPosts, signOut } from "../../lib/appwrite";
 import useAppwrite from "../../hooks/useAppwrite";
 import VideoCard from "../../components/VideoCard";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { icons } from "../../constants";
 import InfoBox from "../../components/InfoBox";
@@ -14,13 +13,13 @@ import InfoBox from "../../components/InfoBox";
 const Profile = () => {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
 
-  const { data: posts, fetchData } = useAppwrite(() => getUserPosts(user.$id));
+  const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
 
   const logout = async () => {
     await signOut();
     setUser(null);
     setIsLoggedIn(false);
-    router.replace('/sign-in')
+    router.replace("/sign-in");
   };
 
   return (
