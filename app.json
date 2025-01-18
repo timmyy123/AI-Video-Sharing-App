@@ -20,7 +20,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ],
+      "package": "com.timmy26.AIVideoSharingApp"
     },
     "web": {
       "bundler": "metro",
@@ -54,12 +59,20 @@
             "useExoplayerSmoothStreaming": false,
             "useExoplayerHls": false,
             "useExoplayerDash": false
-          }    
+          }
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d63a8380-a768-4aed-a8af-a7b37b3be525"
+      }
     }
   }
 }
