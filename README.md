@@ -1,5 +1,5 @@
 Aora - AI Video Sharing App
-Welcome to Aora, an AI-powered video sharing app built with cutting-edge technologies to provide a seamless and engaging user experience. This project demonstrates my skills as a software developer, showcasing my ability to integrate various technologies and create a functional, user-friendly application.
+Welcome to Aora, an AI video sharing app built with cutting-edge technologies to provide a seamless and engaging user experience. This project demonstrates my skills as a software developer, showcasing my ability to integrate various technologies and create a functional, user-friendly application.
 
 use this link to install it on your device
 https://expo.dev/accounts/timmy26/projects/AI-Video-Sharing-App/builds/1a57af22-9f25-44f9-a2b7-4fd79d8a0b15
