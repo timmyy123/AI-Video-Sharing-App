@@ -14,7 +14,8 @@
         "NSCameraUsageDescription": "This app needs access to your camera.",
         "NSMicrophoneUsageDescription": "This app needs access to your microphone.",
         "NSPhotoLibraryUsageDescription": "This app needs access to your photo library."
-      }
+      },
+      "bundleIdentifier": "com.timmy26.AIVideoSharingApp"
     },
     "android": {
       "adaptiveIcon": {
