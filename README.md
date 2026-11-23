@@ -1,4 +1,5 @@
 Aora - AI Video Sharing App
+Tutorial project from javascript mastery youtube channel, hand typed every line watching video from start to deployment
 Welcome to Aora, an AI video sharing app built with cutting-edge technologies to provide a seamless and engaging user experience. This project demonstrates my skills as a software developer, showcasing my ability to integrate various technologies and create a functional, user-friendly application.
 
 use this link to install it on your device
